@@ -4,9 +4,9 @@ var Promise = require('bluebird');
 var request = require('superagent');
 var parser = require('htmlparser2');
 
-var listingService = {};
+var adService = {};
 
-listingService.handleIngest = function(city, section) {
+adService.handleIngest = function(city, section) {
     return new Promise(function(resolve, reject) {
         request.get('https://' + city + '.craigslist.org/search/' + section)
         .end(function(err, res) {
@@ -45,4 +45,4 @@ listingService.handleIngest = function(city, section) {
     });
 };
 
-module.exports = listingService;
+module.exports = adService;
