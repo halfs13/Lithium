@@ -10,6 +10,19 @@ var adController = {};
 
 var DB_TYPE = 'ad';
 
+adController.fetchPage = function(req, res) {
+    var city = 'baltimore';
+    var section = 'sof';
+
+    service.handleIngest(city, section)
+    .then(function(posts) {
+        res.status(200).json(posts);
+    })
+    .catch(function(err) {
+        res.status(500).json(err);
+    });
+};
+
 adController.listAds = function(req, res) {
     config.db.client.search({
         index: config.db.index,
@@ -47,9 +60,10 @@ adController.indexSection = function(req, res) {
     var city = 'baltimore';
     var section = 'sof';
 
-    service.handleIngest(city, section)
-    .then(function(posts) {
-        res.status(200).json(posts);
+    service.fetchSection(city, section)
+    .then(service.indexAds)
+    .then(function() {
+        res.status(200).send();
     })
     .catch(function(err) {
         res.status(500).json(err);

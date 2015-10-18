@@ -4,9 +4,14 @@ var Promise = require('bluebird');
 var request = require('superagent');
 var parser = require('htmlparser2');
 
+var config = require('config');
+
+var DB_TYPE = 'ad';
+
 var adService = {};
 
-adService.handleIngest = function(city, section) {
+adService.fetchSection = function(city, section) {
+    //TODO read subsequent pages
     return new Promise(function(resolve, reject) {
         fetchPage('https://' + city + '.craigslist.org/search/' + section)
         .then(resolve)
@@ -58,6 +63,21 @@ var processPage = function(err, res) {
 
         parse.write(res.text);
         parse.end();
+    });
+};
+
+adService.indexAds = function(ads) {
+    return ads.each(function(ad) {
+        return adService.indexAd(ad);
+    });
+};
+
+adService.indexAd = function(ad) {
+    return config.db.client.index({
+        index: config.db.index,
+        type: DB_TYPE,
+        id: ad.id,
+        body: ad
     });
 };
 

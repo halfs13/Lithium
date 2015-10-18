@@ -10,6 +10,7 @@ var logger = config.logger.child({
 
 var controller = require('./controller.js');
 
+router.get('/fetchpage/?'), controller.fetchPage);
 router.get('/indexsection/?', controller.indexSection);
 router.get('/?', controller.listAds);
 router.get('/:id?', controller.getAd);
