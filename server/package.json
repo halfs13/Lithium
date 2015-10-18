@@ -1,0 +1,43 @@
+{
+    "name": "lithium",
+    "version": "0.0.1",
+    "description": "Online ad site analysis tool",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/halfs13/Lithium.git"
+    },
+    "author": "halfs13",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/halfs13/Lithium/issues"
+    },
+    "homepage": "https://github.com/halfs13/Lithium#readme",
+    "dependencies": {
+        "bluebird": "2.10.2",
+        "bunyan": "1.5.1",
+
+        "express": "4.13.3",
+        "method-override": "2.3.5",
+        "body-parser": "1.14.1",
+        "cors": "2.7.1",
+        "multer": "1.0.6",
+
+        "express-jwt": "3.1.0",
+        "bcrypt": "0.8.5",
+        "uuid": "2.0.1",
+        "htmlparser2": "3.8.3",
+
+        "grunt": "0.4.5",
+        "jshint": "2.8.0",
+
+        "superagent": "1.4.0",
+
+        "elasticsearch": "8.2.0",
+
+        "config": "file:./lib/config"
+    }
+}
