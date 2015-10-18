@@ -1,0 +1,32 @@
+{
+  "name": "lithium",
+  "version": "0.0.1",
+  "author": "halfs13",
+  "license": "MIT",
+  "description": "An online ad analysis tool",
+
+  "dependencies": {
+    "gulp": "3.9.0",
+    "gulp-jshint": "1.11.2",
+    "jshint-stylish": "2.0.1",
+
+    "gulp-jscs": "3.0.1",
+    "gulp-jscs-stylish": "1.2.1",
+    "main-bower-files": "2.9.0",
+    "gulp-less": "3.0.3",
+    "gulp-nodemon": "2.0.4",
+    "gulp-install": "0.6.0",
+
+    "del": "2.0.2",
+    "bluebird": "2.10.2"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/halfs13/ThirdEyeDesigns.git"
+  },
+  "bugs": {
+    "url": "https://github.com/halfs13/ThirdEyeDesigns/issues"
+  },
+  "homepage": "https://github.com/halfs13/ThirdEyeDesigns#readme"
+}
