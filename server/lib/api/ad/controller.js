@@ -56,4 +56,8 @@ adController.indexSection = function(req, res) {
     });
 };
 
+adController.indexCity = function(req, res) {
+    var city = 'baltimore';
+};
+
 module.exports = adController;
