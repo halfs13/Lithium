@@ -14,7 +14,7 @@ adController.fetchPage = function(req, res) {
     var city = 'baltimore';
     var section = 'sof';
 
-    service.handleIngest(city, section)
+    service.fetchSection(city, section)
     .then(function(posts) {
         res.status(200).json(posts);
     })
@@ -53,6 +53,20 @@ adController.getAd = function(req, res) {
 var flush = function() {
     return config.db.client.indices.flushSynced({
         index: config.db.index
+    });
+};
+
+adController.indexAd = function(req, res) {
+    var city = 'baltimore';
+    var section = 'sof';
+    var id = '5274808578';
+
+    service.indexAd(city, section, id)
+    .then(function() {
+        res.status(201).send();
+    })
+    .catch(function(err) {
+        res.status(500).json(err);
     });
 };
 

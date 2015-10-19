@@ -14,6 +14,7 @@ adService.fetchSection = function(city, section) {
     //TODO read subsequent pages
     return new Promise(function(resolve, reject) {
         fetchPage('https://' + city + '.craigslist.org/search/' + section)
+        .then(processPageLinks)
         .then(resolve)
         .catch(reject);
     });
@@ -23,15 +24,18 @@ var fetchPage = function(url) {
     return new Promise(function(resolve, reject) {
         request.get(url)
         .end(function(err, res) {
-            processPage(err, res)
-            .then(resolve)
-            .catch(reject);
+            console.log(err);
+            if(err) {
+                console.log("In error");
+                return reject(err);
+            }
+            resolve(res);
         });
     });
 };
 
-var processPage = function(err, res) {
-    return new Promise(function(resolve, reject) {
+var processPageLinks = function(res) {
+    return new Promise(function(resolve) {
         var links = [];
         var attr = {};
 
@@ -72,13 +76,58 @@ adService.indexAds = function(ads) {
     });
 };
 
-adService.indexAd = function(ad) {
-    return config.db.client.index({
-        index: config.db.index,
-        type: DB_TYPE,
-        id: ad.id,
-        body: ad
+var processAdPage = function(res) {
+    return new Promise(function(resolve) {
+        var ad = {};
+        var tag;
+        var text = '';
+
+        var parse = new parser.Parser({
+            onopentag: function(name, attributes) {
+                if(name === 'title') {
+                    tag = 'title';
+                } else if(name === 'section') {
+                    tag = 'section';
+                }
+            },
+            ontext: function(text) {
+                text += text;
+            },
+            onclosetag: function(name) {
+                if(name === 'title') {
+                    ad.title = text;
+                }
+
+                text = '';
+            },
+            onend: function() {
+                resolve(links);
+            }
+        },{
+            decodeEntities: true
+        });
+
+        parse.write(res.text);
+        parse.end();
     });
+};
+
+adService.indexAd = function(city, section, id) {
+    var url = 'https://' + city + '.craigslist.org/' + section + '/' + id + '.html';
+    console.log("URL: " + url);
+
+    return fetchPage(url)
+    .then(processAdPage)
+    .then(function(pageObject) {
+
+    });
+
+    // return config.db.client.index({
+    //     index: config.db.index,
+    //     type: DB_TYPE,
+    //     id: ad.id,
+    //     body: ad
+    // });
 };
 
 module.exports = adService;
