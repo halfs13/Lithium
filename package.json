@@ -1,9 +1,9 @@
 {
-  "name": "lithium",
+  "name": "bleach",
   "version": "0.0.1",
   "author": "halfs13",
   "license": "MIT",
-  "description": "An online ad analysis tool",
+  "description": "Craigslist api ingest server",
 
   "dependencies": {
     "gulp": "3.9.0",
@@ -36,10 +36,10 @@
 
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/halfs13/ThirdEyeDesigns.git"
+    "url": "git+https://github.com/halfs13/lithium.git"
   },
   "bugs": {
-    "url": "https://github.com/halfs13/ThirdEyeDesigns/issues"
+    "url": "https://github.com/halfs13/lithium/issues"
   },
-  "homepage": "https://github.com/halfs13/ThirdEyeDesigns#readme"
+  "homepage": "https://github.com/halfs13/lithium#readme"
 }
